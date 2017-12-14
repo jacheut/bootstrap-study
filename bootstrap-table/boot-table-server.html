@@ -37,40 +37,24 @@
 </html>
 
 <!--
-We can also use remote url data by setting url: 'data1.json'.
+服务端分页
 -->
 
 <script>
-    /*$('#table').bootstrapTable({
-        columns: [{
-            field: 'id',
-            title: 'Item ID'
-        }, {
-            field: 'name',
-            title: 'Item Name'
-        }, {
-            field: 'price',
-            title: 'Item Price'
-        }],
-        data: [{
-            id: 1,
-            name: 'Item 1',
-            price: '$1'
-        }, {
-            id: 2,
-            name: 'Item 2',
-            price: '$2'
-        }]
-    });*/
 
     $('#table').bootstrapTable({
-        url: '../data/data1.json',
+        url: '../data/data2.json',
         striped: true,
         pagination: true,
-        sidePagination:'client',
+        sidePagination:'server',
         smartDisplay: false,
         responseHandler: function (res) {
-            return res;
+            //var data=res["rows"];
+            return {
+                "total": 12,//总页数
+                "pageNumber":1, //当前页码
+                "rows": res //数据转成json对象
+            };
         },
         columns: [{
             field: 'id',
